@@ -1,0 +1,11 @@
+from flask_restplus import Namespace, fields
+
+
+class UserDto:
+    api = Namespace('user', description='user related operations')
+    user = api.model('user', {
+        'email': fields.String(required=True, description='user email address', example='xyz@abc.com'),
+        'username': fields.String(required=True, description='user username', example='xyz'),
+        'password': fields.String(required=True, description='user password', example='my_password'),
+        'public_id': fields.String(description='user Identifier')
+    })
