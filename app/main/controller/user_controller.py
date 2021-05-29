@@ -7,10 +7,12 @@ from ..service.user_service import save_new_user, get_all_users, get_a_user
 api = UserDto.api
 _user = UserDto.user
 
+
 @api.errorhandler
 def specific_namespace_error_handler(error):
     '''Namespace error handler'''
     return {'message': str(error)}, getattr(error, 'code', 500)
+
 
 @api.route('/', endpoint='user-root')
 class UserList(Resource):
@@ -26,7 +28,8 @@ class UserList(Resource):
     def post(self):
         """Creates a new User """
         data = request.json
-        return save_new_user(data=data)
+        self.user = save_new_user(data=data)
+        return self.user
 
 
 @api.route('/<public_id>', endpoint='get-user')

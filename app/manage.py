@@ -2,13 +2,13 @@ import os
 import unittest
 import sys
 
-# sys.path.append('/home/mukesh/PycharmProjects/webservice/app/__init__.py')
-
+sys.path.append('/home/mukesh/PycharmProjects/webservice/app/__init__.py')
+__package__ = "app"
 from flask_migrate import Migrate
 from main import create_app, db
 from app import blueprint
 from main.model import user
-
+from main.model import blacklist
 app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
 app.register_blueprint(blueprint)
 
@@ -18,8 +18,8 @@ migrate = Migrate(app, db)
 
 
 def run():
+    # app.run(host='0.0.0.0', port=5000)
     app.run()
-
 
 def test():
     """Runs the unit tests."""
@@ -31,4 +31,7 @@ def test():
 
 
 if __name__ == '__main__':
-    run()
+    if 'test' in sys.argv:
+        test()
+    elif 'run' in sys.argv:
+        run()
