@@ -45,7 +45,7 @@ def generate_token(user):
         response_object = {
             'status': 'success',
             'message': 'Successfully registered.',
-            'Authorization': auth_token.decode()
+            'Authorization': auth_token
         }
         return response_object, 201
     except Exception as e:

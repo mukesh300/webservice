@@ -43,11 +43,6 @@ class User(db.Model):
                 'iat': datetime.datetime.utcnow(),
                 'sub': user_id
             }
-            y = jwt.encode(
-                payload,
-                key,
-                algorithm='HS256'
-            )
             return jwt.encode(
                 payload,
                 key,
